@@ -1,4 +1,4 @@
-# 🏗 Scaffold-ETH 2
+# ZK Bootcamp Final Project - Team 8
 
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Documentation</a> |
