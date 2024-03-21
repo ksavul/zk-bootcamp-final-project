@@ -11,3 +11,7 @@ use this vscode extension: noir-lang.vscode-noir
 - nargo prove
 
 - nargo verify (will show errors if proof fails)
+
+# Create Solidity contract verifier
+
+nargo codegen-verifier
