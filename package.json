@@ -19,7 +19,6 @@
     "hardhat-verify": "yarn workspace @se-2/hardhat hardhat-verify",
     "hardhat:format": "yarn workspace @se-2/hardhat format",
     "hardhat:lint": "yarn workspace @se-2/hardhat lint",
-    "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
     "hardhat:test": "yarn workspace @se-2/hardhat test",
     "postinstall": "husky install",
     "next:build": "yarn workspace @se-2/nextjs build",
@@ -43,5 +42,8 @@
     "next": "~14.0.4",
     "vercel": "~32.4.1"
   },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.2.3",
+  "dependencies": {
+    "solc": "^0.8.25"
+  }
 }
