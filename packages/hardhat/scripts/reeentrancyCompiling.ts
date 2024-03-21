@@ -1,10 +1,12 @@
-// import { readFileSync } from 'fs';
-// import path from 'path';
+import { readFileSync } from 'fs';
+import path from 'path';
 import solc from 'solc';
 import { config as dotenvConfig } from 'dotenv';
 import { Transaction } from 'ethers';
 
 dotenvConfig();
+const bytecodestring = readFileSync(path.join(__dirname, 'bytecode.txt'), 'utf8');
+
 
 async function main() {
     // Define the source code as a string
@@ -61,9 +63,9 @@ async function main() {
     }
 
     const bytecode = output.contracts['ReentrancyVulnerable.sol']['ReentrancyVulnerable'].evm.bytecode.object;
-    const disassembled = disassemble(bytecode);
+    // const disassembled = disassemble(bytecode);
     console.log("Bytecode:", bytecode);
-    // console.log("Disassembled:", disassembled);
+    console.log(bytecodestring);
 }
 
 function disassemble(bytecode) {
