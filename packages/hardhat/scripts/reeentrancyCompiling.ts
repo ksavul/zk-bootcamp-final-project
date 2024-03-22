@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync , writeFileSync} from 'fs';
 import path from 'path';
 import solc from 'solc';
 import { config as dotenvConfig } from 'dotenv';
@@ -65,7 +65,38 @@ async function main() {
     const bytecode = output.contracts['ReentrancyVulnerable.sol']['ReentrancyVulnerable'].evm.bytecode.object;
     // const disassembled = disassemble(bytecode);
     console.log("Bytecode:", bytecode);
-    console.log(bytecodestring);
+    // console.log(bytecodestring);
+    console.log("Disassembled:", parseOpcodes(bytecode));
+}
+
+function parseOpcodes(bytecode: string): string[] {
+    let index = 0;
+    const opcodes: any = [];
+
+    while (index < bytecode.length) {
+        let opcode = bytecode.substring(index, index + 2);
+        // convert the opcode to a decimal number
+        opcodes.push(opcode);
+        index += 2;
+
+        // If it's a PUSH opcode, skip the corresponding bytes
+        if (opcode >= '60' && opcode <= '7f') {
+            const bytesToSkip = parseInt(opcode, 16) - 0x5f;
+            index += bytesToSkip * 2;
+        }
+    }
+
+    console.log(opcodes.length);
+
+    // convert all the opcodes to a decimal number
+    for (let i = 0; i < opcodes.length; i++) {
+        opcodes[i] = parseInt(opcodes[i], 16);
+    }
+
+    // save the opcodes to a file
+    writeFileSync(path.join(__dirname, 'bytecode.txt'), 'opcodes=[' + opcodes.join(',') + ']');
+
+    return opcodes;
 }
 
 function disassemble(bytecode) {
