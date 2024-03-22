@@ -461,7 +461,7 @@ function App() {
         <MainContainer>
           <ChatContainer>
             <ConversationHeader>
-              <Avatar src="https://github.com/ToJen/circuit-breaker/raw/main/docs/LOGO.png" name="Emily" />
+              <Avatar src="https://github.com/ToJen/circuit-breaker/raw/main/docs/LOGO.png" name="ZK Audits" />
               <ConversationHeader.Content userName="ZK Audits" info="🟢 Active now" />
               <ConversationHeader.Actions>
                 <VoiceCallButton />
