@@ -1,17 +1,17 @@
-fn main(opcodes: pub [Field; 843]) -> pub bool{
-    let f1: Field = 241;
-    let s54: Field = 84;
-    let s55: Field = 85;
+fn main(opcodes: pub [Field; 843], dangerous_seq: [Field; 3]) -> pub bool{
+    // let f1: Field = 241;
+    // let s54: Field = 84;
+    // let s55: Field = 85;
 
     let mut last_opcode_found = 0;
     let mut found = false;
     
     for opcode in opcodes {
-        if (last_opcode_found == 0) & (opcode == s54) {
+        if (last_opcode_found == 0) & (opcode == dangerous_seq[0]) {
             last_opcode_found = 1;
-        } else if (last_opcode_found == 1) & (opcode == f1) {
+        } else if (last_opcode_found == 1) & (opcode == dangerous_seq[1]) {
             last_opcode_found = 2;
-        } else if (last_opcode_found == 2) & (opcode == s55) {
+        } else if (last_opcode_found == 2) & (opcode == dangerous_seq[2]) {
           found = true;
         }
     }
