@@ -2,23 +2,27 @@ export default function splitBytecodeAtJumps(bytecode) {
   bytecode = filterOpcodes(bytecode.toLowerCase());
 
   const jumpOpcodes = ["56", "57"];
+  let segments = [];
+  let currentSequence = "";
 
-  let segmentStartIndexes = [0];
   for (let i = 0; i < bytecode.length; i += 2) {
     const opcode = bytecode.substring(i, i + 2);
+
     if (jumpOpcodes.includes(opcode)) {
-      segmentStartIndexes.push(i + 2);
+      if (currentSequence !== "") {
+        segments.push(currentSequence);
+        currentSequence = "";
+      }
+    } else {
+      currentSequence += opcode;
     }
   }
 
-  let segments = [];
-  for (let i = 0; i < segmentStartIndexes.length; i++) {
-    const start = segmentStartIndexes[i];
-    const end = segmentStartIndexes[i + 1] || bytecode.length;
-    segments.push(bytecode.substring(start, end));
+  // Add the last sequence if it's not empty
+  if (currentSequence !== "") {
+    segments.push(currentSequence);
   }
-
-  return segments.filter((value) => value !== "");
+  return segments;
 }
 
 //Filters bytecode so only opcodes are left (data is removed)
